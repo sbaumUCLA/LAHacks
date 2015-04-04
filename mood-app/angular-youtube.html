@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+ 
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+ 
+  <script type="text/javascript">
+
+  function PhoneListCtrl($scope, $http){
+    var dataurl ='http://gdata.youtube.com/feeds/api/videos?q="string%20calculator"%20kata%20-tekpub%20-movie&orderby=rating&alt=json';
+
+    $http.get(dataurl).success(function(data){
+        $scope.vids = data.feed.entry;
+    });
+
+  }
+  </script>
+ 
+</head>
+<body >
+  <div ng-app ng-controller="PhoneListCtrl">
+ <table>
+    <tr ng-repeat="vid in vids | filter:query">
+      <td>
+        <iframe width="300" height="169" src="{{vid.media$group.media$content[0].url}}" frameborder="0" allowfullscreen></iframe>
+        <td>
+      <td>
+        <h3>{{vid.title.$t}}</h3>
+        {{vid.content.$t}}
+        <td>
+    </tr>
+ 
+ </table>
+</div>
+</body>
+</html>
