@@ -1,0 +1,9 @@
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://www.goodreads.com/quotes/tag/love", false);
+xhr.send();
+
+console.log(xhr.status);
+console.log(xhr.statusText);
+
+//jQuery(".quoteText");
+//console log first 10
