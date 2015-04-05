@@ -1,0 +1,66 @@
+<head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
+</head>
+
+<script type="text/javascript">
+	function PostData() {
+	    // 1. Create XHR instance - Start
+	    var xhr;
+	    if (window.XMLHttpRequest) {
+	        xhr = new XMLHttpRequest();
+	    }
+	    else if (window.ActiveXObject) {
+	        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+	    }
+	    else {
+	        throw new Error("Ajax is not supported by this browser");
+	    }
+	    // 1. Create XHR instance - End
+	    
+	    // 2. Define what to do when XHR feed you the response from the server - Start
+	    // puts the response in div1
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status == 200 && xhr.status < 300) {
+	            	var json_data = $.parseJSON( xhr.response );
+	            	console.log(json_data);
+	            	//var $jQueryObject = $($.parseHTML(xhr.response));
+	            	var url_array = new Array();
+	            	var j = 0;
+	            	$.each(json_data, function(i,item){
+	            		var colorURL = item.imageUrl;
+	            		var str = "<img src=\"" + colorURL + "\" />";
+	            		console.log(colorURL);
+	            		url_array[j] = str;
+	            		j++;
+	            	});
+	            	console.log(url_array);
+
+	            	//console.log($jQueryObject.filter('#playlist').get(0));
+	            	//console.log($jQueryObject.html());
+	            	//document.getElementById('div1').innerHTML = xhr.response;
+	            	console.log(xhr.responseText);
+	            	document.getElementById('div1').innerHTML = url_array ;
+	            	//document.getElementById('div1').innerHTML = xhr.responseText;
+	                //document.getElementById('div1').innerHTML = $jQueryObject.find(".quoteText").html();
+	            }
+	        }
+	    }
+	    // 2. Define what to do when XHR feed you the response from the server - Start
+
+	    var mood = document.getElementById("mood").value;
+
+	    // 3. Specify your action, location and Send to the server - Start 
+	    xhr.open('POST', 'colourloversscrape.php');
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    xhr.send("mood=" + mood);
+	    // 3. Specify your action, location and Send to the server - End
+	}
+</script>
+
+<form>
+    <label for="mood">Mood :</label>
+    <input type="text" name ="mood" id="mood" onblur="PostData()" />
+    <div id="div1"></div>
+    <input type="button" value ="Check" onclick="PostData()" />
+</form>
