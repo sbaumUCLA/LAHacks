@@ -1,0 +1,80 @@
+<head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
+</head>
+
+<script type="text/javascript">
+	function PostData() {
+	    // 1. Create XHR instance - Start
+	    var xhr;
+	    if (window.XMLHttpRequest) {
+	        xhr = new XMLHttpRequest();
+	    }
+	    else if (window.ActiveXObject) {
+	        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+	    }
+	    else {
+	        throw new Error("Ajax is not supported by this browser");
+	    }
+	    // 1. Create XHR instance - End
+	    
+	    // 2. Define what to do when XHR feed you the response from the server - Start
+	    // puts the response in div1
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status == 200 && xhr.status < 300) {
+	            	var json_data = $.parseJSON( xhr.response );
+	            	console.log(json_data);
+	            	//DO STUFF HERE WITH YOUR HTML FILE TO EXTRACT WHAT WE WANT
+	            	//EXTRACT JSON FEATURE THAT GIVES PHOTO URL SO WE CAN POST IT
+	            	//IN YOUR CASE PHOTOS
+	            	//json_data?
+	            	var url_array = new Array();
+	            	var j = 0;
+	            	$.each(json_data.photos.photo, function(i,item){
+	            		var photoURL = 'http://farm' + item.farm + '.static.flickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg';
+	            		var ownerURL = "http://www.flickr.com/photos/" + item.owner + "/" + item.id + "/";
+	            		var str = "<img src=\"" + photoURL + "\" />";
+	            		var str2 = "<a href=\"" + ownerURL + "\">" + str + "</a>";
+	            		console.log(photoURL);
+	            		url_array[j] = str2;
+	            		j++;
+	            		if(j > 9){
+	            			return false;
+	            		}
+	            	});
+	            	console.log(url_array);
+	            	
+
+	            	//what i did to get quotes:
+	            	//var $jQueryObject = $($.parseHTML(xhr.response));
+	            	//var quotes = $jQueryObject.map(function(){
+	            	//	return $(this).find(".quoteText").map(function(){
+	            	//		return $(this).html();
+	            	//	}).get().join("");
+	            	//}).get();
+	            	//document.getElementById('div1').innerHTML = quotes;
+	            	console.log(json_data);
+	            	document.getElementById('div1').innerHTML = url_array ;
+	                //document.getElementById('div1').innerHTML = xhr.responseText;
+	                //this above needs to be replaced by whatever you want 
+	            }
+	        }
+	    }
+	    // 2. Define what to do when XHR feed you the response from the server - Start
+
+	    var mood = document.getElementById("mood").value;
+
+	    // 3. Specify your action, location and Send to the server - Start 
+	    xhr.open('POST', 'flickrscrape.php');
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    xhr.send("mood=" + mood);
+	    // 3. Specify your action, location and Send to the server - End
+	}
+</script>
+
+<form>
+    <label for="mood">Mood :</label>
+    <input type="text" name ="mood" id="mood" onblur="PostData()" />
+    <div id="div1"></div>
+    <input type="button" value ="Check" onclick="PostData()" />
+</form>

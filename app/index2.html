@@ -1,0 +1,26 @@
+<html ng-app="app">
+  <body>
+    <div class="main">
+      <!--<div class="greeting">
+        <h3>How are you feeling? {{user.mood}}</h3>
+      </div>-->
+      <div class="fields">
+
+        <form ng-submit="myFunc()" ng-controller="mycontroller">
+            <input type="text" ng-model="mood" />
+        </form><br><br>
+        {{user.rectangles}}
+        <div class="colors"></div><br><br>
+        <div class="gifs"></div>
+        <img ng-repeat="gif in gifs" src="{{gif.url}}" class="gif" />
+        <!--<label>
+          Mood
+          <input type="text" ng-model="user.mood" />
+        </label>-->
+      </div>
+    </div>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>

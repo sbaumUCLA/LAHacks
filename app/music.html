@@ -1,0 +1,205 @@
+<head>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
+</head>
+
+<script type="text/javascript">
+	function PostData() {
+	    // 1. Create XHR instance - Start
+	    var xhr;
+	    if (window.XMLHttpRequest) {
+	        xhr = new XMLHttpRequest();
+	    }
+	    else if (window.ActiveXObject) {
+	        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+	    }
+	    else {
+	        throw new Error("Ajax is not supported by this browser");
+	    }
+	    // 1. Create XHR instance - End
+	    
+	    // 2. Define what to do when XHR feed you the response from the server - Start
+	    // puts the response in div1
+	    xhr.onreadystatechange = function () {
+	        if (xhr.readyState === 4) {
+	            if (xhr.status == 200 && xhr.status < 300) {
+	            	//var json_data = $.parseJSON( xhr.response );
+	            	//console.log(json_data);
+	            	//DO STUFF HERE WITH YOUR HTML FILE TO EXTRACT WHAT WE WANT
+	            	//EXTRACT JSON FEATURE THAT GIVES PHOTO URL SO WE CAN POST IT
+	            	//IN YOUR CASE PHOTOS
+	            	//json_data?
+
+	            	//what i did to get quotes:
+
+	            	//var xmlString = xhr.response;
+	            	var $jQueryObject = $($.parseHTML(xhr.responseText));
+	            	var mix_arr = [];
+	            	var mix_id = [];
+	            	var j = 1;
+	            	var mixes = $jQueryObject.map(function(){
+	            		return $(this).find(".mix_url").map(function(){
+	            			if (j == 1 || j == 3 || j == 5) {
+	            				mix_arr.push($(this).attr('href'));
+	            			}
+	            			j++;
+	            			return $(this).html();
+	            		}).get();
+	            	}).get();
+
+	            	j = 1;
+	            	var mixes = $jQueryObject.map(function(){
+	            		return $(this).find(".mix").map(function(){
+	            			if (j == 1 || j == 3 || j == 5) {
+	            				mix_id.push($(this).attr('data-id'));
+	            			}
+	            			j++;
+	            			return $(this).html();
+	            		}).get();
+	            	}).get();
+
+	            	//var three_playlists = mix_arr.slice(1, 4);
+	            	console.log(mix_id);
+	            	var re = /(.+\043)/;
+					var str = mix_arr[0];
+					var str2 = mix_arr[1];
+					var str3 = mix_arr[2];
+					var m;
+					 
+					var mix_creator = []
+					var simp_mixurl 
+					= []
+
+					if ((m = re.exec(str)) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					simp_mixurl.push(m[0].substring(1,m[0].length-1));
+					if ((m = re.exec(str2)) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					simp_mixurl.push(m[0].substring(1,m[0].length-1));
+					if ((m = re.exec(str3)) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					simp_mixurl.push(m[0].substring(1,m[0].length-1));
+					//--------------------//
+					re = /(.+\/)/;
+					if ((m = re.exec(simp_mixurl[0])) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					mix_creator.push(m[0].substring(0,m[0].length-1));
+					if ((m = re.exec(simp_mixurl[1])) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					mix_creator.push(m[0].substring(0,m[0].length-1));
+					if ((m = re.exec(simp_mixurl[2])) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					mix_creator.push(m[0].substring(0,m[0].length-1));
+					console.log(mix_creator);
+					//----------------------//
+					re = /(\/)(.*)/;
+					var mix_name = [];
+					if ((m = re.exec(simp_mixurl[0])) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					mix_name.push(m[0].substring(1,m[0].length+1));
+					if ((m = re.exec(simp_mixurl[1])) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					mix_name.push(m[0].substring(1,m[0].length+1));
+					if ((m = re.exec(simp_mixurl[2])) !== null) {
+					    if (m.index === re.lastIndex) {
+					        re.lastIndex++;
+					    }
+					}
+					mix_name.push(m[0].substring(1,m[0].length+1));
+					console.log(mix_name);
+
+					//mix_name
+					//mix_creator
+					//simp_mixurl
+					//mix_id
+
+					var final_mixes = []; 
+					var mix_1 = '<iframe src="http://8tracks.com/mixes/' + mix_id[0] + '/player_v3_universal" width="300" height="250" style="border: 0px none;"></iframe>';
+					//<p class="_8t_embed_p" style="font-size: 11px; line-height: 12px;"><a href="' + simp_mixurl[0] + '?utm_medium=trax_embed">' + mix_name[0] + '</a> from <a href="' + mix_creator[0] + '?utm_medium=trax_embed">' + mix_creator[0] + '</a> on <a href="http://8tracks.com?utm_medium=trax_embed">8tracks Radio</a>.</p>';
+
+					var mix_2 = '<iframe src="http://8tracks.com/mixes/' + mix_id[1] + '/player_v3_universal" width="300" height="250" style="border: 0px none;"></iframe>';
+					//<p class="_8t_embed_p" style="font-size: 11px; line-height: 12px;"><a href="' + simp_mixurl[1] + '?utm_medium=trax_embed">' + mix_name[1] + '</a> from <a href="' + mix_creator[1] + '?utm_medium=trax_embed">' + mix_creator[1] + '</a> on <a href="http://8tracks.com?utm_medium=trax_embed">8tracks Radio</a>.</p>';
+
+					var mix_3 = '<iframe src="http://8tracks.com/mixes/' + mix_id[2] + '/player_v3_universal" width="300" height="250" style="border: 0px none;"></iframe>';
+					//<p class="_8t_embed_p" style="font-size: 11px; line-height: 12px;"><a href="' + simp_mixurl[2] + '?utm_medium=trax_embed">' + mix_name[2] + '</a> from <a href="' + mix_creator[2] + '?utm_medium=trax_embed">' + mix_creator[2] + '</a> on <a href="http://8tracks.com?utm_medium=trax_embed">8tracks Radio</a>.</p>';
+					final_mixes.push(mix_1);
+					final_mixes.push(mix_2);
+					final_mixes.push(mix_3);
+	            	//var $jQueryObject2 = $.parseHTML(xhr.responseText);
+	            	//console.log($jQueryObject2.find("#playlist").get());
+	            	//console.log($jQueryObject);
+	            	//var playlist = $($jQueryObject.find("#playlist").get(0)).children();
+	            	//var songs1 = [];
+	            	//var songs = [];
+					//$.each(playlist, function (i) {
+					//    songs1.push( $(this).children("li").innerHTML);
+					//});
+					//$.each(songs1, function (i) {
+					//    songs.push( $(this).attr('title'));
+					//});
+					//console.log(playlist);
+	            	//var liIds = $('#list1 li').map(function(i,n) {
+	            	//	console.log("ah");
+					//    return $(n).attr('title');
+					//}).get().join(',');
+
+					//playlist.find('li').each(function(i)
+					//{
+					//   console.log($(this).attr('title')); // This is your rel value
+					//});
+
+					//console.log(liIds);
+	            	//var quotes = $jQueryObject.map(function(){
+	            	//	return $(this).find(".quoteText").map(function(){
+	            	//		return $(this).html();
+	            	//	}).get().join("");
+	            	//}).get();
+	            	document.getElementById('div1').innerHTML = final_mixes;
+	            	//console.log(json_data);
+	            	//document.getElementById('div1').innerHTML = Object.prototype.toString.call(playlist);
+	                //document.getElementById('div1').innerHTML = xhr.responseText;
+	                //this above needs to be replaced by whatever you want 
+	            }
+	        }
+	    }
+	    // 2. Define what to do when XHR feed you the response from the server - Start
+
+	    var mood = document.getElementById("mood").value;
+
+	    // 3. Specify your action, location and Send to the server - Start 
+	    xhr.open('POST', '8tracksscrape.php');
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    xhr.send("mood=" + mood);
+	    // 3. Specify your action, location and Send to the server - End
+	}
+</script>
+
+<form>
+    <label for="mood">Mood :</label>
+    <input type="text" name ="mood" id="mood" onblur="PostData()" />
+    <div id="div1"></div>
+    <input type="button" value ="Check" onclick="PostData()" />
+</form>
