@@ -4,10 +4,94 @@
 	position: relative;
 }
 
+.page-top {
+  height: 900px;
+}
 body.intro #navbar {
   display: none;
 }
 
-body.intro #navbar {
-  display: none;
+.quote blockquote {
+  font-size: 45px;
+  font-family: 'Playfair Display', serif;
+}
+
+.quote p {
+  font-size: 35px;
+  font-style: italic;
+  font-family: 'Playfair Display,' serif;
+}
+
+.quote h3 {
+  padding: none;
+  margin: none;
+  font-size: 45px;
+  font-family: 'Playfair Display', serif;
+  text-transform: lowercase;
+  font-style: normal;
+}
+
+
+.intro-text {
+	font-size: 24px;
+	font-family: 'Playfair Display', serif;
+	padding: 0;
+	margin: 0;
+	color: #fff;
+	text-align: center;
+	line-height: 1.4;
+}
+
+.intro {
+    background-image: url(img/trees.jpg);
+    height: 1100px;
+}  
+
+.intro-body {
+    display: table-cell;
+    background-color: #E0B8E6;
+    opacity: 0.9;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    height: 900px;
+}
+
+.quote {
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10%;
+  position:fixed;
+  height: 1100px;
+
+  /* hide quote section */
+
+.hero:before {
+    content:'';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    font-size: 0;
+}
+.hero-content {
+    display: inline-block;
+    width: 100%;   
+    position: absolute;
+    background-color: #1B161C;
+}
+
+body {
+  background-color: #1B161C;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+  color: white;
+}
+
+.hide-quote {
+  margin: 40px 40px 40px 40px;
+  padding: 20px 20px 20px 20px;
+  background-color: #1B161C;
 }
