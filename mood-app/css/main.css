@@ -8,6 +8,80 @@ body.intro #navbar {
   display: none;
 }
 
-body.intro #navbar {
-  display: none;
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
+
+.intro-text {
+  position: fixed;
+  z-index: 1;
+	font-size: 24px;
+	font-family: 'Playfair Display', serif;
+	padding: 0;
+	margin: 0;
+	color: #fff;
+	text-align: center;
+	line-height: 1.4;
+}
+
+.intro {
+    background-image: url(img/trees.jpg);
+
+}  
+
+.intro-body {
+    position: relative;
+    display: table-cell;
+        -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-color: #E0B8E6;
+
+    opacity: 0.9;
+}
+
+.quote {
+  position: fixed;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10%;
+
+.quote h2 {
+  padding: 10px 10px 10px 10px;
+  margin: 40px auto;
+}
+    
+body {
+  background-color: #1B161C;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+  color: white;
+}
+
+/*.background {
+  background: none center center;
+  background-color: #010101;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: -2;	
+  top: 0;
+  left: 0;
+}
+
+.overlay {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: hsla(180, 49%, 55%, 0.92);
+  z-index: 2;
+}*/
+
