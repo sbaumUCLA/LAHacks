@@ -12,12 +12,12 @@ body.intro #navbar {
 }
 
 .quote blockquote {
-  font-size: 45px;
+  font-size: 35px;
   font-family: 'Playfair Display', serif;
 }
 
 .quote p {
-  font-size: 35px;
+  font-size: 25px;
   font-style: italic;
   font-family: 'Playfair Display,' serif;
 }
@@ -61,8 +61,9 @@ body.intro #navbar {
 .quote {
   text-align: center;
   vertical-align: middle;
-  padding-top: 10%;
+  padding-top: %;
   position:fixed;
+  opacity: 0.9;
   height: 1100px;
 
   /* hide quote section */
@@ -77,9 +78,37 @@ body.intro #navbar {
 .hero-content {
     display: inline-block;
     width: 100%;   
-    position: absolute;
+    position: relative;
     background-color: #1B161C;
 }
+
+.column1 {
+  display: inline-block;
+  width: 33%;
+  position: relative;
+  vertical-align: top;
+  font-size: 13px;
+  padding:50px;
+  z-index: 1;
+}
+
+.column2 {
+  display: inline-block;
+  width: 33%;
+  position: relative;
+  vertical-align: top;
+  float:right;
+  font-size: 13px;
+}
+
+.column3 {
+  display: inline-block;
+  width: 33%;
+  float:right;
+  vertical-align: top;
+  font-size: 13px;
+}
+
 
 body {
   background-color: #1B161C;
