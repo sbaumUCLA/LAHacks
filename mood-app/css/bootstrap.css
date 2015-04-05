@@ -214,8 +214,10 @@ th {
     content: "";
   }
   pre,
-  blockquote {
-    border: 1px solid #999;
+
+  /* do not want border in header */
+  /*blockquote {
+    border: 1px solid #999;*/ 
 
     page-break-inside: avoid;
   }
@@ -1457,8 +1459,8 @@ abbr[data-original-title] {
 blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
-  font-size: 17.5px;
-  border-left: 5px solid #eee;
+  /*font-size: 17.5px;
+  border-left: 5px solid #eee;*/
 }
 blockquote p:last-child,
 blockquote ul:last-child,

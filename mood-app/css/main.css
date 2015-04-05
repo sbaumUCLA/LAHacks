@@ -37,7 +37,6 @@ body.intro #navbar {
     background-size: cover;
     -o-background-size: cover;
     background-color: #E0B8E6;
-
     opacity: 0.9;
 }
 
@@ -51,7 +50,15 @@ body.intro #navbar {
   padding: 10px 10px 10px 10px;
   margin: 40px auto;
 }
-    
+
+blockquote {
+  font-size: 75px;
+  font-family:'Hammersmith One', sans-serif;
+}
+#mood {
+  padding: none;
+  margin: none;
+} 
 body {
   background-color: #1B161C;
 }
